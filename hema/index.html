@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="home" id="home">
+    <div class="home-overlay">
+      <div class="home-container">
+        <h1 class="home-title">📚 My Smart Library</h1>
+        <p class="home-subtitle">Discover, Borrow, and Learn Smarter</p>
+
+        <div class="home-grid">
+          <button class="home-card" onclick="showLogin()">
+            <i class="fas fa-user-shield"></i>
+            <h3>Librarian Login</h3>
+            <p>Access your admin dashboard</p>
+          </button>
+
+          <button class="home-card" onclick="showUser()">
+            <i class="fas fa-users"></i>
+            <h3>User View</h3>
+            <p>Explore books and borrow instantly</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="login" id="login">
+    <div class="login-overlay">
+      <div class="login-card">
+        <h2>🔐 Librarian Login</h2>
+        <input type="text" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <div class="back-btn" onclick="goHome()">⬅ Back</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dashboard">
+    <div class="dashboard-container">
+      <h2>📘 Librarian Dashboard</h2>
+
+      <div class="dashboard-grid">
+        <button class="dashboard-card" onclick="openBookList()">
+          <h3>📚 View Books</h3>
+          <p>See all available books</p>
+        </button>
+
+        <button class="dashboard-card" onclick="showAddBookForm()">
+          <h3>➕ Add Book</h3>
+          <p>Add new books with details</p>
+        </button>
+
+        <button class="dashboard-card borrow" onclick="openBorrowRequests()">
+          <h3>📩 Borrow Requests <span id="requestCount" class="request-count">0</span></h3>
+          <p>Approve or deny borrow requests</p>
+        </button>
+
+        <button class="dashboard-card logout" onclick="logout()">
+          <h3>🚪 Logout</h3>
+          <p>Exit dashboard</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="addBookModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAddBookForm()">&times;</span>
+      <h2>➕ Add New Book</h2>
+      <form id="addBookForm">
+        <label>Title:</label>
+        <input type="text" id="bookTitle" required>
+
+        <label>Author:</label>
+        <input type="text" id="bookAuthor" required>
+
+        <label>Category:</label>
+        <input type="text" id="bookCategory" required>
+        
+        <label>Book Cover URL (Optional):</label>
+<input type="url" id="bookImageUrl" placeholder="Paste image URL (optional)">
+
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="admin-books" id="adminBooks">
+    <div class="admin-books-overlay">
+      <div class="admin-books-card">
+        <h2>📚 All Books</h2>
+        <div class="book-list" id="adminBookList"></div>
+        <div class="back-btn" onclick="backToDashboard()">⬅ Back</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="user-page" id="userPage">
+    <div class="user-bg-overlay">
+      <div class="user-container">
+        <header class="user-header">
+          <h1>📖 Explore Our Library</h1>
+          <div class="user-filters">
+            <input type="text" id="searchInput" placeholder="🔍 Search by title or author..." oninput="searchBooks()">
+            <select id="filterCategory" onchange="filterByCategory()">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+        </header>
+
+        <div id="userBookList" class="book-grid"></div>
+
+        <button class="back-btn" onclick="goHome()">⬅ Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="bookModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modalBookImg" src="" alt="Book Image" class="modal-img">
+      <h3 id="modalBookTitle"></h3>
+      <p id="modalBookAuthor"></p>
+      <p id="modalBookCategory"></p>
+      <button id="borrowBtn" class="borrow-btn" onclick="borrowBook()">📚 Borrow Book</button>
+    </div>
+  </div>
+
+  <section id="borrowRequests" class="borrow-requests">
+    <div class="borrow-container">
+      <h2>📬 Borrow Requests</h2>
+      <div id="requestList" class="borrow-list"></div>
+      <button class="back-btn" onclick="backToDashboard()">⬅ Back to Dashboard</button>
+    </div>
+  </section>
+
+  <div class="intro" id="intro">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="intro.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    // Ensures modal opens & closes properly
+    window.showAddBookForm = function () {
+      const modal = document.getElementById("addBookModal");
+      if (modal) modal.style.display = "flex";
+    };
+
+    window.closeAddBookForm = function () {
+      const modal = document.getElementById("addBookModal");
+      if (modal) modal.style.display = "none";
+    };
+
+    // Optional: close modal when clicking outside it
+    window.addEventListener("click", (e) => {
+      const modal = document.getElementById("addBookModal");
+      if (e.target === modal) modal.style.display = "none";
+    });
+    
+  </script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
