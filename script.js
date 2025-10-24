@@ -39,8 +39,8 @@ function hideAll() {
 }
 
 let booksData = [];
-let currentUser = "Guest User"; // placeholder for user system
-let activeBorrows = []; // track up to 5 active borrows
+let currentUser = "Guest User";
+let activeBorrows = [];
 
 // ===== Real-time Books =====
 onSnapshot(query(collection(db, "books"), orderBy("title")), (snap) => {
@@ -75,7 +75,7 @@ function renderAdminBooks() {
 
 // ===== Check User Borrow Status =====
 function checkUserBorrowedStatus() {
-  activeBorrows = []; // reset first
+  activeBorrows = [];
   const q = query(collection(db, "borrowedBooks"), orderBy("timestamp", "desc"));
   onSnapshot(q, (snap) => {
     const now = new Date();
@@ -112,7 +112,7 @@ function renderUserBooks(filteredBooks = booksData) {
     const div = document.createElement("div");
     div.className = "book";
 
-    // check if this book is in the user's borrowed list
+    // show borrowed info if this book is currently borrowed by the user
     const borrowData = activeBorrows.find((br) => br.bookTitle === b.title);
     let borrowInfo = "";
 
@@ -187,19 +187,12 @@ function closeModal() {
   $("bookModal").style.display = "none";
 }
 
-// ===== Borrow Book (limit 5) =====
+// ===== Borrow Book (No Limit) =====
 async function borrowBook() {
-  if (activeBorrows.length >= 5) {
-    alert("⚠️ You have reached the limit of 5 borrowed books. Please return one before borrowing again.");
-    closeModal();
-    return;
-  }
-
   const title = $("borrowBtn").dataset.title;
   const book = booksData.find((b) => b.title === title);
   if (!book) return;
 
-  // check if the same book is already borrowed by the user
   const alreadyBorrowed = activeBorrows.some((b) => b.bookTitle === title);
   if (alreadyBorrowed) {
     alert(`⚠️ You have already borrowed "${title}".`);
