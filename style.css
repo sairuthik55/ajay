@@ -1453,3 +1453,522 @@ body.user-page::before {
   margin-top: 5px;
   text-align: center;
 }
+/* ================= BOOK MODAL (COMPACT STYLE) ================= */
+#bookModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+#bookModal .modal-content {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 20px 28px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 420px; /* ⬅️ smaller modal width */
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.35s ease;
+  position: relative;
+  color: #333;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#bookModal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 1.4rem;
+  color: #666;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#bookModal .close-btn:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Book Cover */
+#modalBookImg {
+  width: 100%;
+  max-height: 220px; /* ⬅️ smaller image */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Book Title */
+#modalBookTitle {
+  font-size: 1.3rem; /* ⬅️ smaller font */
+  color: #4b4efc;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+/* Author & Category */
+#modalBookAuthor,
+#modalBookCategory {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Borrow & Favorite Buttons */
+.borrow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px; /* smaller buttons */
+  margin: 8px 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.borrow-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+}
+
+/* AI Summary */
+.ai-summary {
+  font-size: 0.85rem;
+  background: #f8f9ff;
+  border-left: 3px solid #6c63ff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 12px 0;
+  color: #333;
+  font-style: italic;
+}
+
+/* Rating Section */
+#ratingSection {
+  background: #f5f6ff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+}
+
+#ratingSection h4 {
+  color: #2c3e50;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+#ratingValue {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+#reviewText {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  resize: none;
+}
+
+#saveReviewBtn {
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+#saveReviewBtn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  #bookModal .modal-content {
+    width: 92%;
+    padding: 18px 15px;
+  }
+  #modalBookImg {
+    max-height: 180px;
+  }
+  #modalBookTitle {
+    font-size: 1.1rem;
+  }
+}
+/* ================= FINAL COMPACT BOOK MODAL ================= */
+#bookModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+#bookModal .modal-content {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 20px 22px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 380px; /* ⬅️ smaller width */
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.3s ease;
+  position: relative;
+  color: #333;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#bookModal .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  font-size: 1.3rem;
+  color: #666;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#bookModal .close-btn:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Book Image (smaller height) */
+#modalBookImg {
+  width: 100%;
+  max-height: 160px; /* ⬅️ smaller image height */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+#modalBookTitle {
+  font-size: 1.2rem;
+  color: #4b4efc;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+/* Author & Category */
+#modalBookAuthor,
+#modalBookCategory {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+/* Buttons (Borrow & Favorite) */
+.borrow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 10px; /* smaller */
+  margin: 6px 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.borrow-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 6px rgba(0, 255, 204, 0.3);
+}
+
+/* AI Summary (smaller spacing) */
+.ai-summary {
+  font-size: 0.8rem;
+  background: #f8f9ff;
+  border-left: 3px solid #6c63ff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 10px 0;
+  color: #333;
+  font-style: italic;
+}
+
+/* Rating Section (more compact) */
+#ratingSection {
+  background: #f5f6ff;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+}
+
+#ratingSection h4 {
+  color: #2c3e50;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#ratingValue {
+  width: 100%;
+  padding: 5px 7px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+#reviewText {
+  width: 100%;
+  padding: 6px 7px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  resize: none;
+}
+
+#saveReviewBtn {
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+#saveReviewBtn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  #bookModal .modal-content {
+    width: 92%;
+    padding: 15px 14px;
+  }
+  #modalBookImg {
+    max-height: 130px;
+  }
+  #modalBookTitle {
+    font-size: 1.05rem;
+  }
+}
+/* ================= PRACTICAL BOOK MODAL ================= */
+#bookModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding-top: 60px; /* keeps modal slightly higher */
+}
+
+#bookModal .modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 20px 24px;
+  margin: 0 auto 50px;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  animation: modalFade 0.25s ease;
+  position: relative;
+  color: #333;
+  font-family: "Inter", sans-serif;
+}
+
+@keyframes modalFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#bookModal .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.2rem;
+  color: #777;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+#bookModal .close-btn:hover {
+  color: #111;
+  transform: scale(1.1);
+}
+
+/* Book Cover */
+#modalBookImg {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+#modalBookTitle {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+/* Author & Category */
+#modalBookAuthor,
+#modalBookCategory {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+/* Buttons */
+.borrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 12px;
+  margin: 8px 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.borrow-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* AI Summary */
+.ai-summary {
+  font-size: 0.82rem;
+  background: #f8f9ff;
+  border-left: 3px solid #6c63ff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 10px 0;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* Rating Section */
+#ratingSection {
+  background: #f6f7ff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 12px;
+  border: 1px solid #e3e3e3;
+}
+
+#ratingSection h4 {
+  color: #2c3e50;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+#ratingValue,
+#reviewText {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+#reviewText {
+  resize: none;
+  min-height: 40px;
+}
+
+#saveReviewBtn {
+  background: linear-gradient(90deg, #6c63ff, #00ffc6);
+  color: #fff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  font-size: 0.85rem;
+  transition: all 0.25s ease;
+}
+#saveReviewBtn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #bookModal .modal-content {
+    width: 92%;
+    padding: 15px;
+  }
+  #modalBookImg {
+    height: 130px;
+  }
+  #modalBookTitle {
+    font-size: 1rem;
+  }
+}
