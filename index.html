@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library App</title>
+  <title>📚 My Smart Library</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
+  <!-- ================= HOME PAGE ================= -->
   <div class="home" id="home">
     <div class="home-overlay">
       <div class="home-container">
@@ -32,6 +33,7 @@
     </div>
   </div>
 
+  <!-- ================= LOGIN PAGE ================= -->
   <section class="login" id="login">
     <div class="login-overlay">
       <div class="login-card">
@@ -44,6 +46,7 @@
     </div>
   </section>
 
+  <!-- ================= DASHBOARD ================= -->
   <section id="dashboard" class="dashboard">
     <div class="dashboard-container">
       <h2>📘 Librarian Dashboard</h2>
@@ -72,6 +75,7 @@
     </div>
   </section>
 
+  <!-- ================= ADD BOOK MODAL ================= -->
   <div id="addBookModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeAddBookForm()">&times;</span>
@@ -87,13 +91,14 @@
         <input type="text" id="bookCategory" required>
         
         <label>Book Cover URL (Optional):</label>
-<input type="url" id="bookImageUrl" placeholder="Paste image URL (optional)">
+        <input type="url" id="bookImageUrl" placeholder="Paste image URL (optional)">
 
         <button type="submit">Add Book</button>
       </form>
     </div>
   </div>
 
+  <!-- ================= ADMIN BOOKS LIST ================= -->
   <section class="admin-books" id="adminBooks">
     <div class="admin-books-overlay">
       <div class="admin-books-card">
@@ -104,11 +109,15 @@
     </div>
   </section>
 
+  <!-- ================= USER PAGE ================= -->
   <div class="user-page" id="userPage">
     <div class="user-bg-overlay">
       <div class="user-container">
         <header class="user-header">
           <h1>📖 Explore Our Library</h1>
+          <div id="reminderBanner" style="display:none;" class="reminder-banner">
+            ⚠️ Some of your borrowed books are due soon! Check your list.
+          </div>
           <div class="user-filters">
             <input type="text" id="searchInput" placeholder="🔍 Search by title or author..." oninput="searchBooks()">
             <select id="filterCategory" onchange="filterByCategory()">
@@ -123,7 +132,9 @@
       </div>
     </div>
   </div>
+  
 
+  <!-- ================= BOOK DETAILS MODAL ================= -->
   <div id="bookModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -132,9 +143,26 @@
       <p id="modalBookAuthor"></p>
       <p id="modalBookCategory"></p>
       <button id="borrowBtn" class="borrow-btn" onclick="borrowBook()">📚 Borrow Book</button>
+      <button id="favBtn" class="borrow-btn" onclick="toggleFavorite()">❤️ Add to Favorites</button>
+
+      <!-- Rating and Review -->
+      <div id="ratingSection">
+        <h4>⭐ Rate this Book</h4>
+        <select id="ratingValue">
+          <option value="">Select Rating</option>
+          <option>1 ⭐</option>
+          <option>2 ⭐⭐</option>
+          <option>3 ⭐⭐⭐</option>
+          <option>4 ⭐⭐⭐⭐</option>
+          <option>5 ⭐⭐⭐⭐⭐</option>
+        </select>
+        <textarea id="reviewText" placeholder="Write a short review..." rows="2"></textarea>
+        <button id="saveReviewBtn" onclick="saveReview()">💾 Save Review</button>
+      </div>
     </div>
   </div>
 
+  <!-- ================= BORROW REQUESTS ================= -->
   <section id="borrowRequests" class="borrow-requests">
     <div class="borrow-container">
       <h2>📬 Borrow Requests</h2>
@@ -143,31 +171,13 @@
     </div>
   </section>
 
+  <!-- ================= INTRO VIDEO ================= -->
   <div class="intro" id="intro">
     <video id="introVideo" autoplay muted playsinline>
       <source src="intro.mp4" type="video/mp4">
     </video>
   </div>
 
-  <script>
-    // Ensures modal opens & closes properly
-    window.showAddBookForm = function () {
-      const modal = document.getElementById("addBookModal");
-      if (modal) modal.style.display = "flex";
-    };
-
-    window.closeAddBookForm = function () {
-      const modal = document.getElementById("addBookModal");
-      if (modal) modal.style.display = "none";
-    };
-
-    // Optional: close modal when clicking outside it
-    window.addEventListener("click", (e) => {
-      const modal = document.getElementById("addBookModal");
-      if (e.target === modal) modal.style.display = "none";
-    });
-    
-  </script>
   <script type="module" src="script.js"></script>
 </body>
 </html>
