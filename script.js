@@ -39,8 +39,8 @@ function hideAll() {
 }
 
 let booksData = [];
-let currentUser = "Guest User";
-let activeBorrows = [];
+let currentUser = "Guest User"; // placeholder for user system
+let activeBorrows = []; // track up to 5 active borrows
 
 // ===== Real-time Books =====
 onSnapshot(query(collection(db, "books"), orderBy("title")), (snap) => {
@@ -75,7 +75,7 @@ function renderAdminBooks() {
 
 // ===== Check User Borrow Status =====
 function checkUserBorrowedStatus() {
-  activeBorrows = [];
+  activeBorrows = []; // reset first
   const q = query(collection(db, "borrowedBooks"), orderBy("timestamp", "desc"));
   onSnapshot(q, (snap) => {
     const now = new Date();
@@ -112,7 +112,7 @@ function renderUserBooks(filteredBooks = booksData) {
     const div = document.createElement("div");
     div.className = "book";
 
-    // show borrowed info if this book is currently borrowed by the user
+    // check if this book is in the user's borrowed list
     const borrowData = activeBorrows.find((br) => br.bookTitle === b.title);
     let borrowInfo = "";
 
@@ -187,12 +187,19 @@ function closeModal() {
   $("bookModal").style.display = "none";
 }
 
-// ===== Borrow Book (No Limit) =====
+// ===== Borrow Book (limit 5) =====
 async function borrowBook() {
+  if (activeBorrows.length >= 5) {
+    alert("⚠️ You have reached the limit of 5 borrowed books. Please return one before borrowing again.");
+    closeModal();
+    return;
+  }
+
   const title = $("borrowBtn").dataset.title;
   const book = booksData.find((b) => b.title === title);
   if (!book) return;
 
+  // check if the same book is already borrowed by the user
   const alreadyBorrowed = activeBorrows.some((b) => b.bookTitle === title);
   if (alreadyBorrowed) {
     alert(`⚠️ You have already borrowed "${title}".`);
@@ -369,8 +376,6 @@ window.addEventListener("load", () => {
     });
   }
 });
-
-// ===== Expose to HTML =====
 window.showLogin = showLogin;
 window.showUser = showUser;
 window.goHome = goHome;
@@ -397,3 +402,42 @@ window.showAddBookForm = () => ($("addBookModal").style.display = "flex");
 window.closeAddBookForm = () => ($("addBookModal").style.display = "none");
 window.searchBooks = searchBooks;
 window.filterByCategory = filterByCategory;
+// Run autoAddBooks() once after Firebase is ready
+window.addEventListener("load", () => {
+  // uncomment temporarily to run once
+  autoAddBooks();
+});
+// ===== Save Book Review =====
+async function saveReview() {
+  const title = $("modalBookTitle").textContent;
+  const rating = $("ratingValue").value;
+  const review = $("reviewText").value.trim();
+
+  if (!rating || !review) return alert("⚠️ Please select a rating and write a review!");
+
+  await addDoc(collection(db, "reviews"), {
+    title,
+    rating,
+    review,
+    user: currentUser,
+    time: new Date().toISOString(),
+  });
+
+  alert("✅ Review added successfully!");
+  $("reviewText").value = "";
+  $("ratingValue").value = "";
+}
+window.saveReview = saveReview;
+async function toggleFavorite() {
+  const title = $("modalBookTitle").textContent;
+  const isFav = localStorage.getItem(`fav-${title}`);
+
+  if (isFav) {
+    localStorage.removeItem(`fav-${title}`);
+    alert(`💔 Removed "${title}" from favorites.`);
+  } else {
+    localStorage.setItem(`fav-${title}`, "true");
+    alert(`❤️ Added "${title}" to favorites.`);
+  }
+}
+window.toggleFavorite = toggleFavorite;
